@@ -4,8 +4,8 @@ require 'benchmark'
 require 'ulid'
 
 Rake::TestTask.new do |t|
-  t.libs += %w[spec lib]
-  t.test_files = FileList['spec/**/*_spec.rb']
+  t.libs += %w[test lib]
+  t.test_files = FileList['test/**/*_test.rb']
 end
 
 desc 'Benchmark base32 ULID generation (default 100,000 iterations)'

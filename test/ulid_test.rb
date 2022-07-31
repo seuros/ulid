@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'test_helper'
 require 'base32/crockford'
 
 describe ULID do
