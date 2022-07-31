@@ -15,3 +15,5 @@ task :benchmark, [:iterations] do |_t, args|
     b.report("#{iterations} iterations") { iterations.times { ULID.generate } }
   end
 end
+
+task :default => :test

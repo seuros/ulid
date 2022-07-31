@@ -6,7 +6,7 @@ describe ULID do
     it 'ensures it has 26 chars' do
       ulid = ULID.generate
 
-      ulid.length.must_equal 26
+      assert_equal 26, ulid.length
     end
 
     it 'is sortable' do
@@ -55,7 +55,7 @@ describe ULID do
     it 'encodes the timestamp in the high 48 bits' do
       input_time = Time.now.utc
       bytes = ULID.generate_bytes(input_time)
-      (time_ms,) = "\x0\x0#{bytes[0...6]}".unpack('Q>')
+      (time_ms,_) = "\x0\x0#{bytes[0...6]}".unpack('Q>')
       encoded_time = Time.at(time_ms / 1000.0).utc
       assert_in_delta input_time, encoded_time, 0.001
     end
@@ -64,7 +64,7 @@ describe ULID do
       random_bytes = SecureRandom.random_bytes(ULID::Generator::RANDOM_BYTES)
       ULID.stub(:random_bytes, random_bytes) do
         bytes = ULID.generate_bytes
-        assert bytes[6..-1] == random_bytes
+        assert_equal random_bytes, bytes[6..-1]
       end
     end
   end
